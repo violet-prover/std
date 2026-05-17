@@ -3,7 +3,7 @@
 \data Id {A : U} (x : A) : A -> U
   | refl : Id x x
 
-\operator "~x = ~y" => Id x y
+\operator "\x = \y" => Id x y
   \associativity: \left
 
 # Symmetry: Id x y -> Id y x.  The motive is `\z q -> Id z x`; the refl
