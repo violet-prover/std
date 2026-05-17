@@ -18,9 +18,12 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
+        violet: [stable, current]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-      - uses: violet-prover/setup-violet@v1
+      - uses: violet-prover/setup-violet@v1.1.0
+        with:
+          violet-version: ${{ matrix.violet }}
       - name: Type Check
         run: violet check
