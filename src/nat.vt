@@ -9,7 +9,14 @@
   | add zero n => n
   | add (suc m) n => suc (add m n)
 
+\operator "\x + \y" => add x y
+  \associativity: \left
+
 \let mul : (m n : Nat) -> Nat \where
   mul m n <= \elim m
   | mul zero n => zero
   | mul (suc m) n => add n (mul m n)
+
+\operator "\x * \y" => mul x y
+  \associativity: \left
+  \stronger_than: +

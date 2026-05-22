@@ -1,4 +1,4 @@
-\export Bool
+\export Bool not
 
 \data Bool : U
   | true : Bool
