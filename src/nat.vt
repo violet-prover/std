@@ -1,6 +1,8 @@
 \export Nat add mul
 
-\data Nat : U
+\universe 𝓤
+
+\data Nat : 𝓤
   | zero : Nat
   | suc : Nat -> Nat
 

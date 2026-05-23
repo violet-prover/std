@@ -1,6 +1,8 @@
 \export Id sym trans cong subst
 
-\data Id {A : U} (x : A) : A -> U
+\universe 𝓤
+
+\data Id {A : 𝓤} (x : A) : A -> 𝓤
   | refl : Id x x
 
 \operator "\x = \y" => Id x y
@@ -8,23 +10,23 @@
 
 # Symmetry: Id x y -> Id y x.  The motive is `\z q -> Id z x`; the refl
 # case demands Id x x, which is refl.
-\let sym {A : U} {x y : A} : x = y -> y = x \where
+\let sym {A : 𝓤} {x y : A} : x = y -> y = x \where
   sym p <= \elim p
   | sym refl => refl
 
 # Transitivity.  Eliminate on `q : Id y z`; motive `\w r -> Id x w`; the
 # refl case (w = y) needs Id x y, which is the hypothesis `p`.
-\let trans {A : U} {x y z : A} : x = y -> y = z -> x = z \where
+\let trans {A : 𝓤} {x y z : A} : x = y -> y = z -> x = z \where
   trans p q <= \elim p
   | trans refl q => q
 
 # Congruence: equal inputs give equal outputs under any function.
-\let cong {A : U} {B : U} (f : A -> B) {x y : A} : x = y -> (f x) = (f y) \where
+\let cong {A : 𝓤} {B : 𝓤} (f : A -> B) {x y : A} : x = y -> (f x) = (f y) \where
   cong f p <= \elim p
   | cong f refl => refl
 
 # Transport (a.k.a. subst): a proof at x can be moved to one at y along p.
 # This is exactly J specialized to a non-dependent motive.
-\let subst {A : U} (P : A -> U) (x y : A) : x = y -> (px : P x) -> P y \where
+\let subst {A : 𝓤} (P : A -> 𝓤) (x y : A) : x = y -> (px : P x) -> P y \where
   subst P x y p px <= \elim p
   | subst P x y refl px => px

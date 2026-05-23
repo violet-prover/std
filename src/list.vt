@@ -1,5 +1,7 @@
 \export List
 
-\data List (A : U) : U
+\universe 𝓤
+
+\data List (A : 𝓤) : 𝓤
   | nil : List A
   | cons : A -> List A -> List A
