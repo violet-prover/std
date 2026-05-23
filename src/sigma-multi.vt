@@ -1,7 +1,7 @@
 \export SigmaM
 
-\universe U V
+\universe 𝓤 𝓥
 
-\record SigmaM (A : U) (B : A -> V) : U ⊔ V
+\record SigmaM (A : 𝓤) (B : A -> 𝓥) : 𝓤 ⊔ 𝓥
   | fst : A
   | snd : B fst

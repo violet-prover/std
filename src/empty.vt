@@ -1,6 +1,8 @@
 \export Empty absurd
 
-\data Empty : U
+\universe 𝓤
 
-\let absurd {A : U} : Empty -> A \where
+\data Empty : 𝓤
+
+\let absurd {A : 𝓤} : Empty -> A \where
   absurd e <= \elim e

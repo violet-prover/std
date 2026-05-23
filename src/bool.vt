@@ -1,6 +1,8 @@
 \export Bool not
 
-\data Bool : U
+\universe 𝓤
+
+\data Bool : 𝓤
   | true : Bool
   | false : Bool
 
