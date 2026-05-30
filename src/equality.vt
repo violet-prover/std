@@ -30,3 +30,22 @@
 \let subst {A : 𝓤} (P : A -> 𝓤) (x y : A) : x = y -> (px : P x) -> P y \where
   subst P x y p px <= \elim p
   | subst P x y refl px => px
+
+# ===========================================================================
+# Equational reasoning: the chain is the proof.
+# A derivation reads top-to-bottom and proves the equality between
+# its first and last terms:
+#
+#   x =⟨ p ⟩      -- p : x = y
+#   y =⟨ q ⟩      -- q : y = z
+#   z ∎           -- proves x = z
+#
+# ===========================================================================
+
+\operator "\x ∎" => refl
+
+\operator "\x =⟨ \p ⟩ \rest" => trans p rest
+  \associativity: \right
+
+\operator "\x =⟨⟩ \rest" => rest
+  \associativity: \right
