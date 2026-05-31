@@ -17,5 +17,6 @@
   add-comm m n <= \elim m
   | add-comm zero n => add-zero-r n
   | add-comm (suc m) n =>
-    trans (cong suc (add-comm m n))
-          (add-suc-r n m)
+    ((suc m) + n) =⟨ cong suc (add-comm m n) ⟩
+    (suc (m + n)) =⟨ add-suc-r n m ⟩
+    (n + (suc m)) ∎

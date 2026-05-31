@@ -1,4 +1,4 @@
-\export Id sym trans cong subst
+\export Id sym trans cong subst qed
 
 \universe 𝓤
 
@@ -42,7 +42,8 @@
 #
 # ===========================================================================
 
-\operator "\x ∎" => refl
+\let qed {A : 𝓤} (a : A) : a = a => refl
+\operator "\x ∎" => qed x
 
 \operator "\x =⟨ \p ⟩ \rest" => trans p rest
   \associativity: \right
