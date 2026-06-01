@@ -1,22 +1,22 @@
 \import nat
-\import equality
+\import id
 
 \export add-comm
 
 \let add-zero-r : (n : Nat) -> n = (n + zero) \where
   add-zero-r n <= \elim n
   | add-zero-r zero => refl
-  | add-zero-r (suc n) => cong suc (add-zero-r n)
+  | add-zero-r (suc n) => ap suc (add-zero-r n)
 
 \let add-suc-r : (m n : Nat) -> (Nat/suc (m + n)) = (m + (Nat/suc n)) \where
   add-suc-r m n <= \elim m
   | add-suc-r zero n => refl
-  | add-suc-r (suc m) n => cong suc (add-suc-r m n)
+  | add-suc-r (suc m) n => ap suc (add-suc-r m n)
 
 \let add-comm : (m n : Nat) -> (m + n) = (n + m) \where
   add-comm m n <= \elim m
   | add-comm zero n => add-zero-r n
   | add-comm (suc m) n =>
-    ((suc m) + n) =⟨ cong suc (add-comm m n) ⟩
+    ((suc m) + n) =⟨ ap suc (add-comm m n) ⟩
     (suc (m + n)) =⟨ add-suc-r n m ⟩
     (n + (suc m)) ∎
