@@ -1,4 +1,4 @@
-\export Id sym trans cong subst qed
+\export Id sym trans ap transport qed
 
 \universe 𝓤
 
@@ -20,16 +20,13 @@
   trans p q <= \elim p
   | trans refl q => q
 
-# Congruence: equal inputs give equal outputs under any function.
-\let cong {A : 𝓤} {B : 𝓤} (f : A -> B) {x y : A} : x = y -> (f x) = (f y) \where
-  cong f p <= \elim p
-  | cong f refl => refl
+\let ap {A : 𝓤} {B : 𝓤} (f : A -> B) {x y : A} : x = y -> (f x) = (f y) \where
+  ap f p <= \elim p
+  | ap f refl => refl
 
-# Transport (a.k.a. subst): a proof at x can be moved to one at y along p.
-# This is exactly J specialized to a non-dependent motive.
-\let subst {A : 𝓤} (P : A -> 𝓤) (x y : A) : x = y -> (px : P x) -> P y \where
-  subst P x y p px <= \elim p
-  | subst P x y refl px => px
+\let transport {A : 𝓤} (P : A -> 𝓤) (x y : A) : x = y -> (px : P x) -> P y \where
+  transport P x y p px <= \elim p
+  | transport P x y refl px => px
 
 # ===========================================================================
 # Equational reasoning: the chain is the proof.
