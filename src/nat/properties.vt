@@ -18,5 +18,5 @@
   | add-comm zero n => add-zero-r n
   | add-comm (suc m) n =>
     ((suc m) + n) =⟨ ap suc (add-comm m n) ⟩
-    (suc (m + n)) =⟨ add-suc-r n m ⟩
+    (suc (n + m)) =⟨ add-suc-r n m ⟩
     (n + (suc m)) ∎
