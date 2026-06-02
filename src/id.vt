@@ -1,4 +1,4 @@
-\export Id sym trans ap transport qed
+\export Id sym trans ap transport qed step step-refl
 
 \universe 𝓤
 
@@ -42,8 +42,11 @@
 \let qed {A : 𝓤} (a : A) : a = a => refl
 \operator "\x ∎" => qed x
 
-\operator "\x =⟨ \p ⟩ \rest" => trans p rest
+\let step {A : 𝓤} (x : A) {y z : A} : x = y -> y = z -> x = z => trans
+\let step-refl {A : 𝓤} (x : A) {y : A} : x = y -> x = y => \p -> p
+
+\operator "\x =⟨ \p ⟩ \rest" => step x p rest
   \associativity: \right
 
-\operator "\x =⟨⟩ \rest" => rest
+\operator "\x =⟨⟩ \rest" => step-refl x rest
   \associativity: \right
