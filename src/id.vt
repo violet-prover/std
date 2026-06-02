@@ -42,7 +42,8 @@
 \let qed {A : 𝓤} (a : A) : a = a => refl
 \operator "\x ∎" => qed x
 
-\let step {A : 𝓤} (x : A) {y z : A} : x = y -> y = z -> x = z => trans
+\let step {A : 𝓤} (x : A) {y z : A} (p : x = y) (q : y = z) : x = z =>
+  trans {A} {x} {y} {z} p q
 \let step-refl {A : 𝓤} (x : A) {y : A} : x = y -> x = y => \p -> p
 
 \operator "\x =⟨ \p ⟩ \rest" => step x p rest
