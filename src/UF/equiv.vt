@@ -1,0 +1,44 @@
+\export
+  id comp homotopy
+  has-section is-section is-equiv Equiv
+  id-is-equiv refl-equiv Id-to-Eq
+  is-univalent univalence eqtoid
+
+\import id
+\import sigma
+
+\universe 𝓤
+
+\let id {A : 𝓤} : A -> A => \x -> x
+
+\let comp {A B C : 𝓤} (g : B -> C) (f : A -> B) : A -> C => \x -> g (f x)
+\operator "\g ∘ \f" => comp g f
+
+\let homotopy {A B : 𝓤} (f g : A -> B) : 𝓤 => (x : A) -> (f x) = (g x)
+\operator "\f ∼ \g" => homotopy f g
+
+\let has-section {A B : 𝓤} (r : A -> B) : 𝓤 =>
+  Sigma (B -> A) (\s -> (r ∘ s) ∼ id)
+\let is-section {A B : 𝓤} (s : A -> B) : 𝓤 =>
+  Sigma (B -> A) (\r -> (r ∘ s) ∼ id)
+
+\let is-equiv {A B : 𝓤} (f : A -> B) : 𝓤 =>
+  Sigma (has-section f) (\_ -> is-section f)
+
+\let Equiv (A B : 𝓤) : 𝓤 => Sigma (A -> B) (\f -> is-equiv f)
+\operator "\A ≃ \B" => Equiv A B
+
+\let id-is-equiv (A : 𝓤) : is-equiv {A} {A} id =>
+  { fst => ({ fst => id | snd => \x -> refl })
+  | snd => ({ fst => id | snd => \x -> refl }) }
+
+\let refl-equiv (A : 𝓤) : A ≃ A => { fst => id | snd => id-is-equiv A }
+
+\let Id-to-Eq (A B : 𝓤) : A = B -> A ≃ B \where
+  Id-to-Eq A B p <= \elim p
+  | Id-to-Eq A B refl => refl-equiv A
+
+\let is-univalent (X Y : 𝓤) : 𝓤 => is-equiv (Id-to-Eq X Y)
+\axiom univalence {X Y : 𝓤} : is-univalent X Y
+
+\let eqtoid {X Y : 𝓤} : X ≃ Y -> X = Y => (univalence {X} {Y}).fst.fst
