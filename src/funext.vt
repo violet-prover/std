@@ -1,0 +1,5 @@
+\import id
+
+\universe 𝓤 𝓥
+
+\axiom funExt {A : 𝓤} {B : A -> 𝓥} {f g : (x : A) -> B x} : ((x : A) -> f x = g x) -> f = g
