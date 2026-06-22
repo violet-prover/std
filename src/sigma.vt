@@ -5,3 +5,5 @@
 \record Sigma (A : 𝓤) (B : A -> 𝓤) : 𝓤
   | fst : A
   | snd : B fst
+
+\operator "Σ \x ∶ \A , \B" => Sigma A (\x -> B)
